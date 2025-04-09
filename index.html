@@ -1,82 +1,125 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento como HTML5 | Declares the document type as HTML5 -->
 <html lang="pt-br" data-contexto="foco">
+<!-- Define o idioma da página como português do Brasil e adiciona um atributo de contexto inicial | Sets the page language to Brazilian Portuguese and adds an initial context attribute -->
 
 <head>
     <meta charset="UTF-8">
+    <!-- Define a codificação de caracteres como UTF-8 | Sets the character encoding to UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fokus</title>
+    <!-- Configura a página para ser responsiva em dispositivos móveis | Configures the page to be responsive on mobile devices -->
+    <title>Pomodoro</title>
+    <!-- Define o título da página | Sets the page title -->
     <link rel="shortcut icon" href="./imagens/favicon.ico" type="image/x-icon">
+    <!-- Adiciona um ícone de atalho para a página | Adds a shortcut icon for the page -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Inclui um reset CSS para remover estilos padrão dos navegadores | Includes a CSS reset to remove default browser styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Pré-conexão para carregar fontes mais rapidamente | Preconnect to load fonts faster -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <!-- Importa fontes personalizadas do Google Fonts | Imports custom fonts from Google Fonts -->
     <link rel="stylesheet" href="./styles.css">
+    <!-- Inclui o arquivo de estilos CSS principal | Includes the main CSS stylesheet -->
     <script src="./script.js" defer></script>
+    <!-- Inclui o arquivo JavaScript principal com carregamento adiado | Includes the main JavaScript file with deferred loading -->
 </head>
 
 <body>
     <main class="app">
+        <!-- Elemento principal da aplicação | Main application element -->
         <header class="app__header">
+            <!-- Cabeçalho da aplicação | Application header -->
             <figure class="app__logo-figure">
-                <img class="app__logo-image" src="/imagens/logo.png" alt="">
+                <!-- Container para o logo | Container for the logo -->
+                <img class="app__logo-image" src="/imagens/Pomodoro-09-04-2025.png" alt="Imagem Logo">
+                <!-- Imagem do logo da aplicação | Application logo image -->
             </figure>
         </header>
         <section class="app__section-banner-container">
+            <!-- Seção do banner principal | Main banner section -->
             <h1 class="app__title">
+                <!-- Título principal da aplicação | Main application title -->
                 Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>
+                <!-- Texto destacado no título | Highlighted text in the title -->
             </h1>
             <figure class="app__image-figure">
-                <img class="app__image" src="/imagens/foco.png" alt="">
+                <!-- Container para a imagem do banner | Container for the banner image -->
+                <img class="app__image" src="/imagens/foco.png" alt="Imagem para focar">
+                <!-- Imagem do banner principal | Main banner image -->
             </figure>
         </section>
         <section class="app__section-card-container">
+            <!-- Seção do card principal | Main card section -->
             <div class="app__card">
+                <!-- Card principal da aplicação | Main application card -->
                 <ul class="app__card-list">
+                    <!-- Lista de botões de contexto | Context buttons list -->
                     <li class="app__card-list-item">
+                        <!-- Item da lista para o botão "Foco" | List item for the "Focus" button -->
                         <button data-contexto="foco" class="app__card-button app__card-button--foco active">Foco</button>
+                        <!-- Botão para o modo "Foco" com classe ativa | Button for "Focus" mode with active class -->
                     </li>
                     <li class="app__card-list-item">
+                        <!-- Item da lista para o botão "Descanso Curto" | List item for the "Short Break" button -->
                         <button data-contexto="short" class="app__card-button app__card-button--curto">Descanso curto</button>
+                        <!-- Botão para o modo "Descanso Curto" | Button for "Short Break" mode -->
                     </li>
                     <li class="app__card-list-item">
+                        <!-- Item da lista para o botão "Descanso Longo" | List item for the "Long Break" button -->
                         <button data-contexto="long" class="app__card-button app__card-button--longo">Descanso longo</button>
+                        <!-- Botão para o modo "Descanso Longo" | Button for "Long Break" mode -->
                     </li>
                 </ul>
                 <div id="timer" class="app__card-timer"></div>
+                <!-- Elemento para exibir o timer | Element to display the timer -->
                 <ul class="app__card-list">
+                    <!-- Lista de controles adicionais no card | Additional controls list in the card -->
                     <li class="app__card-list-item">
+                        <!-- Item da lista para o toggle de música | List item for the music toggle -->
                         <label class="toggle">
+                            <!-- Toggle para ativar/desativar a música | Toggle to enable/disable music -->
                             <input class="toggle-checkbox" type="checkbox" id="alternar-musica">
+                            <!-- Checkbox para alternar a música | Checkbox to toggle music -->
                             <div class="toggle-switch"></div>
+                            <!-- Switch visual do toggle | Visual switch for the toggle -->
                         </label>
                     </li>
                     <li class="app__card-list-item">
+                        <!-- Item da lista para o rótulo do toggle | List item for the toggle label -->
                         <label class="app__card-list-label" for="alternar-musica">
                             Música
+                            <!-- Texto do rótulo do toggle | Toggle label text -->
                         </label>
                     </li>
                 </ul>
                 <div class="app__card-primary-button-wrapper">
+                    <!-- Container para o botão principal | Container for the main button -->
                     <button id="start-pause" class="app__card-primary-button">
+                        <!-- Botão principal para iniciar/pausar o timer | Main button to start/pause the timer -->
                         <img class="app__card-primary-butto-icon" src="/imagens/play_arrow.png" alt="">
+                        <!-- Ícone do botão principal | Main button icon -->
                         <span>Começar</span>
+                        <!-- Texto do botão principal | Main button text -->
                     </button>
                 </div>
             </div>
         </section>
 
         <footer class="app__footer">
+            <!-- Rodapé da aplicação | Application footer -->
             <p class="app__footer-text">
-                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly.Desenvolvido por Alura. 
+                <!-- Texto do rodapé | Footer text -->
+                Projeto fictício e sem fins comerciais.
+                <!-- Informações sobre o projeto | Project information -->
             </p>
         </footer>
     </main>
-
 </body>
 
 </html>
