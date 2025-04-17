@@ -1,152 +1,138 @@
-/* Variáveis globais para cores e gradientes | Global variables for colors and gradients */
 :root {
-    --color-primary: #123456; /* Cor primária | Primary color */
-    --color-secondary: #FFF; /* Cor secundária | Secondary color */
-    --azul-royal: #144480; /* Azul royal para elementos destacados | Royal blue for highlighted elements */
-    --fundo-card-timer: rgba(20, 68, 128, 0.30); /* Fundo translúcido do card do timer | Translucent background for the timer card */
-    --lils: #B872FF; /* Cor lilás para elementos ativos | Lilac color for active elements */
-    --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%); /* Gradiente para botões | Gradient for buttons */
+    --color-primary: #123456;
+    --color-secondary: #FFF;
+    --azul-royal: #144480;
+    --fundo-card-timer: rgba(20, 68, 128, 0.30);
+    --lils: #B872FF;
+    --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%);
+    --azul-profundo: #01080E;
+    --fundo-card: rgba(255, 255, 255, 0.50);
+    --fundo-card-concludo: rgba(0, 244, 191, 0.40);
 }
 
-/* Contextos de cores para diferentes modos (foco, descanso curto, descanso longo) | Color contexts for different modes (focus, short break, long break) */
 [data-contexto="foco"] {
-    --main-bg-color: linear-gradient(180deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%); /* Gradiente para o modo foco | Gradient for focus mode */
+    --main-bg-color: linear-gradient(180deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%);
 }
 
 [data-contexto="descanso-curto"] {
-    --main-bg-color: linear-gradient(180deg, #0F725C 0%, #041832 48.44%, #01080E 100%); /* Gradiente para descanso curto | Gradient for short break */
+    --main-bg-color: linear-gradient(180deg, #0F725C 0%, #041832 48.44%, #01080E 100%);
 }
 
 [data-contexto="descanso-longo"] {
-    --main-bg-color: linear-gradient(180deg, #1875E9 0%, #041832 48.44%, #01080E 100%); /* Gradiente para descanso longo | Gradient for long break */
+    --main-bg-color: linear-gradient(180deg, #1875E9 0%, #041832 48.44%, #01080E 100%);
 }
 
-/* Reset de estilos globais | Global style reset */
 * {
-    box-sizing: border-box; /* Define o box model para incluir padding e border | Sets the box model to include padding and border */
-    max-width: 100%; /* Evita que elementos ultrapassem o limite da tela | Prevents elements from exceeding the screen width */
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
-/* Estilo base do HTML | Base HTML styling */
 html {
-    background: var(--main-bg-color); /* Fundo dinâmico baseado no contexto | Dynamic background based on context */
-    min-height: 100vh; /* Altura mínima para cobrir toda a tela | Minimum height to cover the entire screen */
-    font-size: 10px; /* Define a base para rem | Sets the base for rem units */
+    background: var(--main-bg-color);
+    min-height: 100vh;
+    font-size: 10px;
 }
 
-/* Estilo base do corpo da página | Base styling for the page body */
 body {
-    min-height: 100vh; /* Altura mínima para cobrir toda a tela | Minimum height to cover the entire screen */
-    background: url("/imagens/pattern.png"); /* Imagem de fundo com padrão | Background image with a pattern */
-    background-size: cover; /* Faz a imagem cobrir toda a área | Makes the image cover the entire area */
-    background-repeat: no-repeat; /* Evita repetição da imagem | Prevents image repetition */
+    min-height: 100vh;
+    background: url("/imagens/pattern.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-/* Estilo para títulos (h1, h2, etc.) | Styling for headings (h1, h2, etc.) */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Unbounded', cursive; /* Fonte personalizada para títulos | Custom font for headings */
+    font-family: 'Unbounded', cursive;
 }
 
-/* Estilo do logo no cabeçalho | Logo styling in the header */
 .app__logo-figure {
-    display: flex; /* Alinha o logo no centro | Aligns the logo in the center */
+    display: flex;
     justify-content: center;
-    padding: 4rem 0; /* Espaçamento vertical | Vertical spacing */
+    padding: 4rem 0;
 }
-
-/* Ajusta o tamanho da imagem do Pomodoro | Adjusts the size of the Pomodoro image */
 .app__logo-image {
     width: 20rem; /* Define a largura da imagem | Sets the width of the image */
     height: auto; /* Mantém a proporção da imagem | Maintains the aspect ratio of the image */
     max-width: 100%; /* Garante que a imagem não ultrapasse o container | Ensures the image does not exceed the container */
 }
 
-/* Container do banner principal | Main banner container */
 .app__section-banner-container {
-    width: 99rem; /* Largura máxima do banner | Maximum width of the banner */
-    margin: 0 auto; /* Centraliza o banner | Centers the banner */
-    display: flex; /* Layout flexível para elementos internos | Flexible layout for inner elements */
-    justify-content: space-between; /* Espaçamento entre os elementos | Spacing between elements */
-    align-items: center; /* Alinha os elementos verticalmente | Aligns elements vertically */
-    gap: 4rem; /* Espaçamento entre os elementos | Spacing between elements */
-    flex-wrap: wrap; /* Permite quebra de linha em telas menores | Allows line breaks on smaller screens */
+    width: 99rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
 }
 
-/* Estilo do título principal | Main title styling */
 .app__title {
-    line-height: 150%; /* Altura da linha para melhor legibilidade | Line height for better readability */
-    font-size: 5.2rem; /* Tamanho da fonte do título | Font size of the title */
-    font-style: normal; /* Estilo normal da fonte | Normal font style */
-    color: var(--color-secondary); /* Cor do texto | Text color */
-    font-weight: 200; /* Peso da fonte leve | Light font weight */
-    max-width: 46rem; /* Largura máxima do título | Maximum width of the title */
+    line-height: 150%;
+    font-size: 5.2rem;
+    font-style: normal;
+    color: var(--color-secondary);
+    font-weight: 200;
+    max-width: 46rem;
 }
 
-/* Estilo para texto em destaque no título | Styling for highlighted text in the title */
 .app__title-strong {
-    font-weight: 600; /* Peso da fonte mais forte | Stronger font weight */
+    font-weight: 600;
 }
 
-/* Container para o card principal | Container for the main card */
 .app__section-card-container {
-    display: flex; /* Layout flexível para centralizar o card | Flexible layout to center the card */
+    display: flex;
     justify-content: center;
 }
 
-/* Estilo do card principal | Main card styling */
 .app__card {
-    border-radius: 3.2rem; /* Bordas arredondadas | Rounded borders */
-    border: 0.2rem solid var(--azul-royal); /* Borda azul royal | Royal blue border */
-    background: var(--fundo-card-timer); /* Fundo translúcido | Translucent background */
-    padding: 2.4rem; /* Espaçamento interno | Internal spacing */
-    margin: 8rem 0; /* Margem vertical | Vertical margin */
-    width: 59rem; /* Largura fixa do card | Fixed width of the card */
-    max-width: 90%; /* Largura máxima relativa à tela | Maximum width relative to the screen */
+    border-radius: 3.2rem;
+    border: 0.2rem solid var(--azul-royal);
+    background: var(--fundo-card-timer);
+    padding: 2.4rem;
+    margin: 8rem 0;
+    width: 59rem;
+    max-width: 90%;
 }
 
-/* Lista de botões no card | Button list in the card */
 .app__card-list {
-    list-style: none; /* Remove marcadores da lista | Removes list markers */
-    padding: 0; /* Remove padding padrão | Removes default padding */
-    margin: 0; /* Remove margem padrão | Removes default margin */
-    display: flex; /* Layout flexível para os botões | Flexible layout for buttons */
-    align-items: center; /* Alinha os botões verticalmente | Aligns buttons vertically */
-    justify-content: center; /* Centraliza os botões | Centers the buttons */
-    gap: 1.6rem; /* Espaçamento entre os botões | Spacing between buttons */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
 }
 
-/* Estilo dos botões no card | Styling for buttons in the card */
 .app__card-button {
-    font-family: Montserrat; /* Fonte personalizada | Custom font */
-    font-size: 1.8rem; /* Tamanho da fonte | Font size */
-    font-style: normal; /* Estilo normal da fonte | Normal font style */
-    font-weight: 400; /* Peso da fonte regular | Regular font weight */
-    line-height: 150%; /* Altura da linha para legibilidade | Line height for readability */
-    background: none; /* Sem fundo | No background */
-    padding: 0.8rem; /* Espaçamento interno | Internal spacing */
-    color: var(--color-secondary); /* Cor do texto | Text color */
-    border: none; /* Sem borda | No border */
-    cursor: pointer; /* Cursor de ponteiro ao passar o mouse | Pointer cursor on hover */
-    outline: inherit; /* Herda o estilo de foco | Inherits focus style */
+    font-family: Montserrat;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    background: none;
+    padding: 0.8rem;
+    color: var(--color-secondary);
+    border: none;
+    cursor: pointer;
+    outline: inherit;
 }
 
-/* Botão ativo no card | Active button in the card */
 .app__card-button.active {
-    border-radius: 0.8rem; /* Bordas arredondadas | Rounded borders */
-    background: var(--azul-royal); /* Fundo azul royal | Royal blue background */
-    font-weight: 600; /* Peso da fonte mais forte | Stronger font weight */
+    border-radius: 0.8rem;
+    background: var(--azul-royal);
+    font-weight: 600;
 }
 
-/* Estilo do timer no card | Timer styling in the card */
 .app__card-timer {
-    color: var(--color-secondary); /* Cor do texto | Text color */
-    text-align: center; /* Centraliza o texto | Centers the text */
-    font-family: Unbounded; /* Fonte personalizada | Custom font */
-    font-size: 12rem; /* Tamanho da fonte do timer | Timer font size */
-    font-style: normal; /* Estilo normal da fonte | Normal font style */
-    font-weight: 700; /* Peso da fonte forte | Bold font weight */
-    line-height: normal; /* Altura da linha padrão | Default line height */
-    margin: 3.2rem; /* Margem ao redor do timer | Margin around the timer */
+    color: var(--color-secondary);
+    text-align: center;
+    font-family: Unbounded;
+    font-size: 12rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 3.2rem;
+    text-align: center;
 }
 
 .app__card-list-label {
@@ -180,78 +166,120 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
 }
 
-/* Estilo do rodapé | Footer styling */
 .app__footer {
-    display: flex; /* Layout flexível para centralizar o conteúdo | Flexible layout to center content */
-    width: 100%; /* Largura total | Full width */
-    padding: 2.8rem 6rem; /* Espaçamento interno | Internal spacing */
-    justify-content: center; /* Centraliza o texto | Centers the text */
-    align-items: center; /* Alinha o texto verticalmente | Aligns text vertically */
-    background: #010B15; /* Fundo escuro | Dark background */
+    display: flex;
+    width: 100%;
+    padding: 2.8rem 6rem;
+    justify-content: center;
+    align-items: center;
+    background: #010B15;
 }
 
-/* Texto do rodapé | Footer text */
 .app__footer-text {
-    color: rgba(182, 182, 182, 0.8); /* Cor do texto com opacidade | Text color with opacity */
-    text-align: center; /* Centraliza o texto | Centers the text */
-    font-family: Montserrat; /* Fonte personalizada | Custom font */
-    font-size: 1.5rem; /* Tamanho da fonte | Font size */
-    font-style: normal; /* Estilo normal da fonte | Normal font style */
-    font-weight: 400; /* Peso da fonte regular | Regular font weight */
-    line-height: 150%; /* Altura da linha para legibilidade | Line height for readability */
+    color: rgba(182, 182, 182, 0.8);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
 }
 
-/* Estilo do botão toggle | Toggle button styling */
+/* toggle */
 .toggle {
-    cursor: pointer; /* Define o cursor como ponteiro ao passar o mouse | Sets the cursor to pointer on hover */
-    display: inline-block; /* Exibe o toggle como um elemento inline-block | Displays the toggle as an inline-block element */
+    cursor: pointer;
+    display: inline-block;
 }
 
 .toggle-switch {
-    display: inline-block; /* Exibe o switch como um elemento inline-block | Displays the switch as an inline-block element */
-    background: #ccc; /* Cor de fundo padrão do switch | Default background color of the switch */
-    border-radius: 1.6rem; /* Bordas arredondadas do switch | Rounded borders of the switch */
-    width: 5.8rem; /* Largura do switch | Width of the switch */
-    height: 3.2rem; /* Altura do switch | Height of the switch */
-    position: relative; /* Define o posicionamento relativo para o conteúdo interno | Sets relative positioning for inner content */
-    vertical-align: middle; /* Alinha verticalmente ao meio | Vertically aligns to the middle */
-    transition: background 0.25s; /* Transição suave para a mudança de cor de fundo | Smooth transition for background color change */
+    display: inline-block;
+    background: #ccc;
+    border-radius: 1.6rem;
+    width: 5.8rem;
+    height: 3.2rem;
+    position: relative;
+    vertical-align: middle;
+    transition: background 0.25s;
 }
 
 .toggle-switch:before, .toggle-switch:after {
-    content: ""; /* Define conteúdo vazio para os pseudo-elementos | Sets empty content for pseudo-elements */
+    content: "";
 }
 
 .toggle-switch:before {
-    display: block; /* Exibe o círculo do switch como um bloco | Displays the switch circle as a block */
-    background: linear-gradient(to bottom, #fff 0%, #eee 100%); /* Gradiente para o círculo do switch | Gradient for the switch circle */
-    border-radius: 50%; /* Bordas arredondadas do círculo | Rounded borders of the circle */
-    width: 2.4rem; /* Largura do círculo | Width of the circle */
-    height: 2.4rem; /* Altura do círculo | Height of the circle */
-    position: absolute; /* Posicionamento absoluto dentro do switch | Absolute positioning inside the switch */
-    top: 0.4rem; /* Distância do topo do switch | Distance from the top of the switch */
-    left: 0.4rem; /* Distância da esquerda do switch | Distance from the left of the switch */
-    transition: left 0.25s; /* Transição suave para o movimento do círculo | Smooth transition for the circle movement */
+    display: block;
+    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+    border-radius: 50%;
+    width: 2.4rem;
+    height: 2.4rem;
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    transition: left 0.25s;
 }
 
 .toggle:hover .toggle-switch:before {
-    background: linear-gradient(to bottom, #fff 0%, #fff 100%); /* Cor uniforme ao passar o mouse | Uniform color on hover */
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%);
 }
 
 .toggle-checkbox:checked + .toggle-switch {
-    background: var(--lils); /* Cor de fundo quando ativado | Background color when activated */
+    background: var(--lils);
 }
 
 .toggle-checkbox:checked + .toggle-switch:before {
-    left: 3rem; /* Move o círculo para a direita quando ativado | Moves the circle to the right when activated */
+    left: 3rem;
 }
 
 .toggle-checkbox {
-    position: absolute; /* Posicionamento absoluto para o checkbox | Absolute positioning for the checkbox */
-    visibility: hidden; /* Oculta o checkbox padrão | Hides the default checkbox */
+    position: absolute;
+    visibility: hidden;
 }
 
-/* Fim do estilo do toggle | End of toggle styling */
+/* fim - toggle */
+
+/* dropdown */
+.dropdown-container {
+    position: relative;
+}
+
+.app__section-task-header__ul {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    right: 0;
+    min-width: 24rem;
+    padding: 1.6rem;
+}
+
+.app__section-task-header__ul:hover,
+.app_button-more:hover ~ .app__section-task-header__ul {
+    display: block;
+    text-align: right;
+    border-radius: 0.8rem;
+    border: 0.2rem solid var(--azul-royal, #144480);
+    background: var(--fundo-modal-2, #1B293B);
+}
+
+.app__section-task-header__li {
+    margin: 1.6rem 0;
+}
+
+.app__section-task-header__li__button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fff;
+    gap: 0.8rem;
+}
+
+/* fim - dropdown */
+
 
 /* Para Tablets */
 @media (max-width: 1024px) and (min-width: 768px) {
@@ -273,4 +301,217 @@ h1, h2, h3, h4, h5, h6 {
     .app__card-timer {
         font-size: 6rem;
     }
+
+    .app__section-active-task {
+        gap: 2rem;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+
+.app__section-task-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.app__section-task-content {
+    width: 59rem;
+    max-width: 90%;
+    color: #FFF;
+}
+
+.app__section-active-task {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6rem;
+    padding: 4rem 0;
+    border-bottom: 1px solid #144480;
+    margin-bottom: 4rem;
+}
+
+.app__form-textarea,
+.app__form-textarea::placeholder {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    white-space: nowrap;
+    font-family: Montserrat;
+}
+
+.app__section-active-task-description {
+    font-family: Montserrat;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.app__section-tasks-heading {
+    font-size: 2.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.app__section-task-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.app_button-edit,
+.app_button-more {
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.app__section-active-task-label {
+    font-family: Montserrat;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.app__section-task-list {
+    margin-top: 2.4rem;
+    margin-bottom: 4rem;
+}
+
+.app__section-task-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0.8rem;
+    background: var(--fundo-card);
+    margin-bottom: 0.8rem;
+    padding: 1.6rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.app__section-task-list-item-description {
+    flex-grow: 1;
+    margin: 0;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    color: var(--azul-profundo);
+    font-family: Montserrat;
+}
+
+.app__section-task-list-item-complete.app__section-task-list-item {
+    background: var(--fundo-card-concludo);
+    cursor: inherit;
+}
+
+.app__section-task-list-item-active.app__section-task-list-item {
+    border: 2px solid #FFF;
+}
+
+.app__section-task-list-item-complete .app__section-task-icon-status circle {
+    fill: #00F4BF;
+}
+
+.app__form-add-task {
+    padding: 1.6rem;
+    border-radius: 0.8rem;
+    background: var(--fundo-card);
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; 
+    font-family: Montserrat;
+}
+
+.app__form-label {
+    color: var(--azul-profundo);
+    font-family: Unbounded;
+    font-size: 2.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    display: block;
+    margin-bottom: 3.2rem;
+}
+
+.app__form-textarea {
+    width: 100%;
+    border-radius: 0.8rem;
+    padding: 0.8rem;
+    background: #98A0A8;
+}
+
+.app__form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.6rem;
+    margin-top: 3.2rem;
+}
+
+.app__form-footer .splitter {
+    flex-grow: 1;
+}
+
+.app__form-footer__button {
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    color: var(--azul-profundo);
+    font-family: Montserrat;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    gap: 0.8rem;
+}
+
+.app__form-footer__button--confirm {
+    border-radius: 3.2rem;
+    padding: 0.8rem 2.4rem;
+    color: #fff;
+    background: var(--azul-profundo);
+}
+
+.app__button--add-task {
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--lils);
+    border-radius: 3.2rem;
+    border: 0.2rem solid var(--lils);
+    width: 100%;
+    margin-top: 4rem;
+    padding: 1.8rem;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.app_button-edit:disabled {
+    color: #e6e6e6;
+    opacity: 0.8;
+    cursor: not-allowed;
 }
