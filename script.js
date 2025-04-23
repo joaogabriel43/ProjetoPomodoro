@@ -135,3 +135,33 @@ function mostrarTempo() {
 
 // Exibe o tempo inicial ao carregar a página | Display the initial time when the page loads
 mostrarTempo();
+
+// Função para adicionar uma nova tarefa à lista
+function adicionarTarefa(descricao) {
+    // Seleciona a lista de tarefas
+    const listaTarefas = document.querySelector('.app__section-task-list');
+
+    // Cria um novo item da lista
+    const item = document.createElement('li');
+    item.classList.add('app__section-task-list-item'); // Adiciona a classe ao item da lista
+
+    // Cria o parágrafo para a descrição da tarefa
+    const paragrafo = document.createElement('p');
+    paragrafo.classList.add('app__section-task-list-item-description'); // Adiciona a classe ao parágrafo
+    paragrafo.textContent = descricao; // Define o texto do parágrafo
+
+    // Cria o botão de edição
+    const botaoEditar = document.createElement('button');
+    botaoEditar.classList.add('app_button-edit'); // Adiciona a classe ao botão
+    botaoEditar.textContent = 'Editar'; // Define o texto do botão
+
+    // Adiciona o parágrafo e o botão ao item da lista
+    item.appendChild(paragrafo);
+    item.appendChild(botaoEditar);
+
+    // Adiciona o item à lista de tarefas
+    listaTarefas.appendChild(item);
+}
+
+// Exemplo de uso: adicionando uma nova tarefa
+adicionarTarefa('Minha nova tarefa');

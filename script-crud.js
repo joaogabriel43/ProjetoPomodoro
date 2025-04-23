@@ -1,6 +1,6 @@
 // Seleciona o botão "Adicionar nova tarefa" com a classe .app__button--add-task
 const botaoAdicionarTarefa = document.querySelector('.app__button--add-task');
-
+ 
 // Seleciona o formulário de adicionar tarefas com a classe .app__form-add-task
 const formulario = document.querySelector('.app__form-add-task');
 
@@ -21,7 +21,12 @@ function renderizarTarefas() {
         item.classList.add('app__section-task-list-item');
         item.innerHTML = `
             <p class="app__section-task-list-item-description">${tarefa.descricao}</p>
-            <button class="app__section-task-list-item-delete" data-index="${index}">Excluir</button>
+            <button class="app__section-task-list-item-edit" data-index="${index}">
+                <img src="./imagens/edit.svg" alt="Editar" class="app__button-edit-icon">
+            </button>
+            <button class="app__section-task-list-item-delete" data-index="${index}">
+                Excluir
+            </button>
         `;
         listaTarefas.appendChild(item);
     });
