@@ -1,155 +1,135 @@
 <!DOCTYPE html>
-<!-- Declaração do tipo de documento como HTML5 | Declares the document type as HTML5 -->
 <html lang="pt-br" data-contexto="foco">
-<!-- Define o idioma da página como português do Brasil e adiciona um atributo de contexto inicial | Sets the page language to Brazilian Portuguese and adds an initial context attribute -->
 
 <head>
+    <!-- Define o conjunto de caracteres como UTF-8 -->
     <meta charset="UTF-8">
-    <!-- Define a codificação de caracteres como UTF-8 | Sets the character encoding to UTF-8 -->
+    <!-- Define a viewport para responsividade -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Configura a página para ser responsiva em dispositivos móveis | Configures the page to be responsive on mobile devices -->
+    <!-- Define o título da página -->
     <title>Pomodoro</title>
-    <!-- Define o título da página | Sets the page title -->
+    <!-- Define o favicon da página -->
     <link rel="shortcut icon" href="./imagens/favicon.ico" type="image/x-icon">
-    <!-- Adiciona um ícone de atalho para a página | Adds a shortcut icon for the page -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- Adiciona um ícone de atalho para a página | Adds a shortcut icon for the page -->
+    <!-- Inclui o reset de estilos para padronizar o CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Inclui um reset CSS para remover estilos padrão dos navegadores | Includes a CSS reset to remove default browser styles -->
+    <!-- Preconexão com o Google Fonts para melhorar o carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pré-conexão para carregar fontes mais rapidamente | Preconnect to load fonts faster -->
+    <!-- Inclui as fontes Montserrat, Prata e Unbounded -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- Importa fontes personalizadas do Google Fonts | Imports custom fonts from Google Fonts -->
+    <!-- Inclui o arquivo de estilos CSS -->
     <link rel="stylesheet" href="./styles.css">
-    <!-- Inclui o arquivo de estilos CSS principal | Includes the main CSS stylesheet -->
+    <!-- Inclui o script principal da aplicação -->
     <script src="./script.js" defer></script>
-    <!-- Inclui o arquivo JavaScript principal com carregamento adiado | Includes the main JavaScript file with deferred loading -->
+    <!-- Inclui o script para manipulação de tarefas -->
     <script src="./script-crud.js" defer></script>
-    <!-- Inclui o arquivo JavaScript adicional para o CRUD de tarefas | Includes the additional JavaScript file for task CRUD -->
 </head>
 
 <body>
     <main class="app">
-        <!-- Elemento principal da aplicação | Main application element -->
+        <!-- Cabeçalho da aplicação -->
         <header class="app__header">
-            <!-- Cabeçalho da aplicação | Application header -->
+            <!-- Figura do logo -->
             <figure class="app__logo-figure">
-                <!-- Container para o logo | Container for the logo -->
-                <img class="app__logo-image" src="./imagens/Pomodoro-09-04-2025.png" alt="Imagem Logo">
-                <!-- Imagem do logo da aplicação | Application logo image -->
+                <img class="app__logo-image" src="/imagens/Pomodoro-09-04-2025.png" alt="">
             </figure>
         </header>
+
+        <!-- Seção do banner -->
         <section class="app__section-banner-container">
-            <!-- Seção do banner principal | Main banner section -->
+            <!-- Título principal -->
             <h1 class="app__title">
-                <!-- Título principal da aplicação | Main application title -->
                 Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>
-                <!-- Texto destacado no título | Highlighted text in the title -->
             </h1>
+            <!-- Imagem do banner -->
             <figure class="app__image-figure">
-                <!-- Container para a imagem do banner | Container for the banner image -->
-                <img class="app__image" src="./imagens/foco.png" alt="">
-                <!-- Imagem do banner principal | Main banner image -->
+                <img class="app__image" src="/imagens/foco.png" alt="">
             </figure>
         </section>
+
+        <!-- Seção do card principal -->
         <section class="app__section-card-container">
-            <!-- Seção do card principal | Main card section -->
             <div class="app__card">
-                <!-- Card principal da aplicação | Main application card -->
+                <!-- Lista de botões de contexto -->
                 <ul class="app__card-list">
-                    <!-- Lista de botões de contexto | Context buttons list -->
                     <li class="app__card-list-item">
-                        <!-- Item da lista para o botão "Foco" | List item for the "Focus" button -->
                         <button data-contexto="foco" class="app__card-button app__card-button--foco active">Foco</button>
-                        <!-- Botão para o modo "Foco" com classe ativa | Button for "Focus" mode with active class -->
                     </li>
                     <li class="app__card-list-item">
-                        <!-- Item da lista para o botão "Descanso Curto" | List item for the "Short Break" button -->
                         <button data-contexto="short" class="app__card-button app__card-button--curto">Descanso curto</button>
-                        <!-- Botão para o modo "Descanso Curto" | Button for "Short Break" mode -->
                     </li>
                     <li class="app__card-list-item">
-                        <!-- Item da lista para o botão "Descanso Longo" | List item for the "Long Break" button -->
                         <button data-contexto="long" class="app__card-button app__card-button--longo">Descanso longo</button>
-                        <!-- Botão para o modo "Descanso Longo" | Button for "Long Break" mode -->
                     </li>
                 </ul>
+                <!-- Timer principal -->
                 <div id="timer" class="app__card-timer"></div>
-                <!-- Elemento para exibir o timer | Element to display the timer -->
+                <!-- Alternador de música -->
                 <ul class="app__card-list">
-                    <!-- Lista de controles adicionais no card | Additional controls list in the card -->
                     <li class="app__card-list-item">
-                        <!-- Item da lista para o toggle de música | List item for the music toggle -->
                         <label class="toggle">
-                            <!-- Toggle para ativar/desativar a música | Toggle to enable/disable music -->
                             <input class="toggle-checkbox" type="checkbox" id="alternar-musica">
-                            <!-- Checkbox para alternar a música | Checkbox to toggle music -->
                             <div class="toggle-switch"></div>
-                            <!-- Switch visual do toggle | Visual switch for the toggle -->
                         </label>
                     </li>
                     <li class="app__card-list-item">
-                        <!-- Item da lista para o rótulo do toggle | List item for the toggle label -->
                         <label class="app__card-list-label" for="alternar-musica">
                             Música
-                            <!-- Texto do rótulo do toggle | Toggle label text -->
                         </label>
                     </li>
                 </ul>
+                <!-- Botão principal de iniciar/pausar -->
                 <div class="app__card-primary-button-wrapper">
-                    <!-- Container para o botão principal | Container for the main button -->
                     <button id="start-pause" class="app__card-primary-button">
-                        <!-- Botão principal para iniciar/pausar o timer | Main button to start/pause the timer -->
-                        <img class="app__card-primary-butto-icon" src="./imagens/play_arrow.png" alt="">
-                        <!-- Ícone do botão principal | Main button icon -->
+                        <img class="app__card-primary-butto-icon" src="/imagens/play_arrow.png" alt="">
                         <span>Começar</span>
-                        <!-- Texto do botão principal | Main button text -->
                     </button>
                 </div>
             </div>
         </section>
+
+        <!-- Seção de tarefas -->
         <section class="app__section-task-container">
-            <!-- Seção para a lista de tarefas | Section for the task list -->
             <div class="app__section-task-content">
+                <!-- Tarefa em andamento -->
                 <header class="app__section-active-task">
-                    <!-- Tarefa em andamento | Active task -->
                     <p class="app__section-active-task-label">#Em andamento:</p>
                     <p class="app__section-active-task-description"></p>
                 </header>
+                <!-- Cabeçalho da lista de tarefas -->
                 <div class="app__section-task-header">
-                    <!-- Cabeçalho da lista de tarefas | Task list header -->
                     <h2 class="app__section-tasks-heading">Lista de tarefas:</h2>
                     <div class="dropdown-container">
-                        <!-- Menu suspenso para ações na lista de tarefas | Dropdown menu for task list actions -->
+                        <!-- Botão de opções -->
                         <button class="app_button-more">
-                            <img src="./imagens/more.svg" alt="">
+                            <img src="/imagens/more.svg" alt="">
                         </button>
+                        <!-- Lista de ações -->
                         <ul class="app__section-task-header__ul">
                             <li class="app__section-task-header__li">
                                 <button class="app__section-task-header__li__button" id="btn-remover-concluidas">
-                                    <img src="./imagens/check.svg" alt="">
+                                    <img src="/imagens/check.svg" alt="">
                                     Limpar tarefas concluídas
                                 </button>
                             </li>
                             <li class="app__section-task-header__li">
                                 <button class="app__section-task-header__li__button" id="btn-remover-todas">
-                                    <img src="./imagens/trash.svg" alt="">
+                                    <img src="/imagens/trash.svg" alt="">
                                     Limpar todas as tarefas
                                 </button>
                             </li>
                         </ul>
                     </div>
                 </div>
+                <!-- Lista de tarefas -->
                 <ul class="app__section-task-list"></ul>
-                <!-- Lista de tarefas | Task list -->
+                <!-- Formulário para adicionar tarefas -->
                 <form class="app__form-add-task hidden" aria-hidden="true">
-                    <!-- Formulário para adicionar tarefas | Form to add tasks -->
                     <div class="app__form-field">
                         <label class="app__form-label">
                             Adicionando tarefa
@@ -158,30 +138,32 @@
                     </div>
                     <footer class="app__form-footer">
                         <button type="button" class="app__form-footer__button app__form-footer__button--delete">
-                            <img src="./imagens/delete.png" alt=""> Deletar
+                            <img src="/imagens/delete.png" alt=""> Deletar
                         </button>
                         <div class="splitter"></div>
                         <button type="button" class="app__form-footer__button app__form-footer__button--cancel">
-                            <img src="./imagens/close.png" alt=""> Cancelar
+                            <img src="/imagens/close.png" alt=""> Cancelar
                         </button>
                         <button class="app__form-footer__button app__form-footer__button--confirm">
-                            <img src="./imagens/save.png" alt=""> Salvar
+                            <img src="/imagens/save.png" alt=""> Salvar
                         </button>
                     </footer>
                 </form>
+                <!-- Botão para adicionar nova tarefa -->
                 <button class="app__button--add-task">
-                    <img src="./imagens/add_circle.png" alt=""> Adicionar nova tarefa
+                    <img src="/imagens/add_circle.png" alt=""> Adicionar nova tarefa
                 </button>
             </div>
         </section>
+
+        <!-- Rodapé da aplicação -->
         <footer class="app__footer">
-            <!-- Rodapé da aplicação | Application footer -->
             <p class="app__footer-text">
-                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly. Desenvolvido por Alura.
-                <!-- Informações sobre o projeto | Project information -->
+                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly. Desenvolvido por Alura. 
             </p>
         </footer>
     </main>
+
 </body>
 
 </html>

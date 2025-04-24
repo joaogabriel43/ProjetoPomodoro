@@ -1,138 +1,157 @@
+/* Define as variáveis globais de cores e estilos */
 :root {
-    --color-primary: #123456;
-    --color-secondary: #FFF;
-    --azul-royal: #144480;
-    --fundo-card-timer: rgba(20, 68, 128, 0.30);
-    --lils: #B872FF;
-    --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%);
-    --azul-profundo: #01080E;
-    --fundo-card: rgba(255, 255, 255, 0.50);
-    --fundo-card-concludo: rgba(0, 244, 191, 0.40);
+    --color-primary: #123456; /* Cor primária */
+    --color-secondary: #FFF; /* Cor secundária */
+    --azul-royal: #144480; /* Azul royal */
+    --fundo-card-timer: rgba(20, 68, 128, 0.30); /* Fundo do card do timer */
+    --lils: #B872FF; /* Cor lilás */
+    --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%); /* Gradiente para botões */
+    --azul-profundo: #01080E; /* Azul profundo */
+    --fundo-card: rgba(255, 255, 255, 0.50); /* Fundo do card */
+    --fundo-card-concludo: rgba(0, 244, 191, 0.40); /* Fundo do card concluído */
 }
 
+/* Define o fundo para o contexto "foco" */
 [data-contexto="foco"] {
     --main-bg-color: linear-gradient(180deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%);
 }
 
+/* Define o fundo para o contexto "descanso curto" */
 [data-contexto="descanso-curto"] {
     --main-bg-color: linear-gradient(180deg, #0F725C 0%, #041832 48.44%, #01080E 100%);
 }
 
+/* Define o fundo para o contexto "descanso longo" */
 [data-contexto="descanso-longo"] {
     --main-bg-color: linear-gradient(180deg, #1875E9 0%, #041832 48.44%, #01080E 100%);
 }
 
+/* Define o estilo global para todos os elementos */
 * {
-    box-sizing: border-box;
-    max-width: 100%;
+    box-sizing: border-box; /* Define o box-sizing como border-box */
+    max-width: 100%; /* Limita a largura máxima */
 }
 
+/* Define o estilo para o elemento <html> */
 html {
-    background: var(--main-bg-color);
-    min-height: 100vh;
-    font-size: 10px;
+    background: var(--main-bg-color); /* Define o fundo com base no contexto */
+    min-height: 100vh; /* Altura mínima de 100% da viewport */
+    font-size: 10px; /* Define o tamanho base da fonte */
 }
 
+/* Define o estilo para o elemento <body> */
 body {
-    min-height: 100vh;
-    background: url("/imagens/pattern.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+    min-height: 100vh; /* Altura mínima de 100% da viewport */
+    background: url("/imagens/pattern.png"); /* Define uma imagem de fundo */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
 }
 
+/* Define o estilo para os títulos (h1 a h6) */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Unbounded', cursive;
+    font-family: 'Unbounded', cursive; /* Define a fonte como Unbounded */
 }
 
+/* Define o estilo para o container do logo */
 .app__logo-figure {
-    display: flex;
-    justify-content: center;
-    padding: 4rem 0;
+    display: flex; /* Define o layout como flexbox */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    padding: 4rem 0; /* Define o espaçamento interno */
 }
+
+/* Define o estilo para a imagem do logo */
 .app__logo-image {
-    width: 20rem; /* Define a largura da imagem | Sets the width of the image */
-    height: auto; /* Mantém a proporção da imagem | Maintains the aspect ratio of the image */
-    max-width: 100%; /* Garante que a imagem não ultrapasse o container | Ensures the image does not exceed the container */
+    width: 100%; /* Largura total */
+    max-width: 30rem; /* Largura máxima de 30rem */
 }
 
+/* Define o estilo para o container do banner */
 .app__section-banner-container {
-    width: 99rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
+    width: 99rem; /* Largura fixa */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    display: flex; /* Define o layout como flexbox */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 4rem; /* Define o espaçamento entre os itens */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
 }
 
+/* Define o estilo para o título principal */
 .app__title {
-    line-height: 150%;
-    font-size: 5.2rem;
-    font-style: normal;
-    color: var(--color-secondary);
-    font-weight: 200;
-    max-width: 46rem;
+    line-height: 150%; /* Altura da linha */
+    font-size: 5.2rem; /* Tamanho da fonte */
+    font-style: normal; /* Estilo normal */
+    color: var(--color-secondary); /* Cor secundária */
+    font-weight: 200; /* Peso da fonte */
+    max-width: 46rem; /* Largura máxima */
 }
 
+/* Define o estilo para o texto em negrito no título */
 .app__title-strong {
-    font-weight: 600;
+    font-weight: 600; /* Peso da fonte */
 }
 
+/* Define o estilo para o container do card */
 .app__section-card-container {
-    display: flex;
-    justify-content: center;
+    display: flex; /* Define o layout como flexbox */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
 }
 
+/* Define o estilo para o card */
 .app__card {
-    border-radius: 3.2rem;
-    border: 0.2rem solid var(--azul-royal);
-    background: var(--fundo-card-timer);
-    padding: 2.4rem;
-    margin: 8rem 0;
-    width: 59rem;
-    max-width: 90%;
+    border-radius: 3.2rem; /* Bordas arredondadas */
+    border: 0.2rem solid var(--azul-royal); /* Borda azul royal */
+    background: var(--fundo-card-timer); /* Fundo do card */
+    padding: 2.4rem; /* Espaçamento interno */
+    margin: 8rem 0; /* Margem vertical */
+    width: 59rem; /* Largura fixa */
+    max-width: 90%; /* Largura máxima de 90% */
 }
 
+/* Define o estilo para a lista de botões no card */
 .app__card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.6rem;
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove o padding */
+    margin: 0; /* Remove a margem */
+    display: flex; /* Define o layout como flexbox */
+    align-items: center; /* Alinha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    gap: 1.6rem; /* Espaçamento entre os itens */
 }
 
+/* Define o estilo para os botões do card */
 .app__card-button {
-    font-family: Montserrat;
-    font-size: 1.8rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    background: none;
-    padding: 0.8rem;
-    color: var(--color-secondary);
-    border: none;
-    cursor: pointer;
-    outline: inherit;
+    font-family: Montserrat; /* Define a fonte como Montserrat */
+    font-size: 1.8rem; /* Tamanho da fonte */
+    font-style: normal; /* Estilo normal */
+    font-weight: 400; /* Peso da fonte */
+    line-height: 150%; /* Altura da linha */
+    background: none; /* Remove o fundo */
+    padding: 0.8rem; /* Espaçamento interno */
+    color: var(--color-secondary); /* Cor secundária */
+    border: none; /* Remove a borda */
+    cursor: pointer; /* Define o cursor como pointer */
+    outline: inherit; /* Herda o outline */
 }
 
+/* Define o estilo para o botão ativo */
 .app__card-button.active {
-    border-radius: 0.8rem;
-    background: var(--azul-royal);
-    font-weight: 600;
+    border-radius: 0.8rem; /* Bordas arredondadas */
+    background: var(--azul-royal); /* Fundo azul royal */
+    font-weight: 600; /* Peso da fonte */
 }
 
+/* Define o estilo para o timer no card */
 .app__card-timer {
-    color: var(--color-secondary);
-    text-align: center;
-    font-family: Unbounded;
-    font-size: 12rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin: 3.2rem;
-    text-align: center;
+    color: var(--color-secondary); /* Cor secundária */
+    text-align: center; /* Alinha o texto ao centro */
+    font-family: Unbounded; /* Define a fonte como Unbounded */
+    font-size: 12rem; /* Tamanho da fonte */
+    font-style: normal; /* Estilo normal */
+    font-weight: 700; /* Peso da fonte */
+    line-height: normal; /* Altura da linha */
+    margin: 3.2rem; /* Margem */
+    text-align: center; /* Alinha o texto ao centro */
 }
 
 .app__card-list-label {
@@ -511,7 +530,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app_button-edit:disabled {
-    color: #e6e6e6;
-    opacity: 0.8;
-    cursor: not-allowed;
+    color: #e6e6e6; /* Cor cinza claro */
+    opacity: 0.8; /* Define a opacidade */
+    cursor: not-allowed; /* Define o cursor como não permitido */
 }

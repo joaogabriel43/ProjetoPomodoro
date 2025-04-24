@@ -1,167 +1,161 @@
-// Seleção de elementos do DOM | DOM element selection
-const html = document.querySelector('html'); // Elemento raiz do HTML | Root HTML element
-const focoBt = document.querySelector('.app__card-button--foco'); // Botão para o modo "Foco" | Button for "Focus" mode
-const curtoBt = document.querySelector('.app__card-button--curto'); // Botão para o modo "Descanso Curto" | Button for "Short Break" mode
-const longoBt = document.querySelector('.app__card-button--longo'); // Botão para o modo "Descanso Longo" | Button for "Long Break" mode
-const banner = document.querySelector('.app__image'); // Imagem do banner que muda conforme o contexto | Banner image that changes based on context
-const titulo = document.querySelector('.app__title'); // Título principal da aplicação | Main title of the application
-const botoes = document.querySelectorAll('.app__card-button'); // Lista de botões de contexto | List of context buttons
-const startPauseBt = document.querySelector('#start-pause'); // Botão principal para iniciar/pausar o timer | Main button to start/pause the timer
-const musicaFocoInput = document.querySelector('#alternar-musica'); // Checkbox para alternar música | Checkbox to toggle music
-const iniciarOuPausarBt = document.querySelector('#start-pause span'); // Texto do botão principal | Main button text
-const iniciarOuPausarBtIcone = document.querySelector(".app__card-primary-butto-icon"); // Ícone do botão principal | Main button icon
-const tempoNaTela = document.querySelector('#timer'); // Elemento que exibe o tempo restante | Element displaying the remaining time
+// Seleciona o elemento <html> para manipular atributos globais
+const html = document.querySelector('html')
 
-// Áudios utilizados no projeto | Audio files used in the project
-const musica = new Audio('/sons/luna-rise-part-one.mp3'); // Música de fundo | Background music
-const audioPlay = new Audio('/sons/play.wav'); // Som ao iniciar o timer | Sound when starting the timer
-const audioPausa = new Audio('/sons/pause.mp3'); // Som ao pausar o timer | Sound when pausing the timer
-const audioTempoFinalizado = new Audio('./sons/beep.mp3'); // Som ao finalizar o timer | Sound when the timer ends
+// Seleciona o botão "Foco" com a classe .app__card-button--foco
+const focoBt = document.querySelector('.app__card-button--foco')
 
-// Variáveis de controle | Control variables
-let tempoDecorridoEmSegundos = 30; // Tempo inicial em segundos (30 segundos para teste) | Initial time in seconds (30 seconds for testing)
-let intervaloId = null; // ID do intervalo do timer (usado para pausar ou limpar) | Timer interval ID (used to pause or clear)
+// Seleciona o botão "Descanso curto" com a classe .app__card-button--curto
+const curtoBt = document.querySelector('.app__card-button--curto')
 
-// Configuração para que a música de fundo toque em loop | Configure background music to loop
-musica.loop = true;
+// Seleciona o botão "Descanso longo" com a classe .app__card-button--longo
+const longoBt = document.querySelector('.app__card-button--longo')
 
-// Listener para alternar a música de fundo | Listener to toggle background music
+// Seleciona o banner da aplicação com a classe .app__image
+const banner = document.querySelector('.app__image')
+
+// Seleciona o título principal da aplicação com a classe .app__title
+const titulo = document.querySelector('.app__title')
+
+// Seleciona todos os botões de contexto com a classe .app__card-button
+const botoes = document.querySelectorAll('.app__card-button')
+
+// Seleciona o botão "Iniciar/Pausar" com o ID #start-pause
+const startPauseBt = document.querySelector('#start-pause')
+
+// Seleciona o checkbox para alternar música com o ID #alternar-musica
+const musicaFocoInput = document.querySelector('#alternar-musica')
+
+// Seleciona o texto do botão "Iniciar/Pausar" com o ID #start-pause span
+const iniciarOuPausarBt = document.querySelector('#start-pause span')
+
+// Seleciona o ícone do botão "Iniciar/Pausar" com a classe .app__card-primary-butto-icon
+const iniciarOuPausarBtIcone = document.querySelector(".app__card-primary-butto-icon") 
+
+// Seleciona o elemento que exibe o tempo com o ID #timer
+const tempoNaTela = document.querySelector('#timer')
+
+// Cria um objeto de áudio para a música de foco
+const musica = new Audio('/sons/luna-rise-part-one.mp3')
+
+// Cria um objeto de áudio para o som de "play"
+const audioPlay = new Audio('/sons/play.wav')
+
+// Cria um objeto de áudio para o som de "pause"
+const audioPausa = new Audio('/sons/pause.mp3')
+
+// Cria um objeto de áudio para o som de "tempo finalizado"
+const audioTempoFinalizado = new Audio('./sons/beep.mp3')
+
+// Define o tempo inicial em segundos
+let tempoDecorridoEmSegundos = 30
+
+// Armazena o ID do intervalo para controle da contagem regressiva
+let intervaloId = null
+
+// Define que a música de foco será reproduzida em loop
+musica.loop = true
+
+// Adiciona um evento ao checkbox para alternar a música de foco
 musicaFocoInput.addEventListener('change', () => {
-    if (musica.paused) {
-        musica.play(); // Toca a música se estiver pausada | Play music if paused
+    if(musica.paused) {
+        musica.play() // Reproduz a música se estiver pausada
     } else {
-        musica.pause(); // Pausa a música se estiver tocando | Pause music if playing
+        musica.pause() // Pausa a música se estiver tocando
     }
-});
+})
 
-// Listener para o botão "Foco" | Listener for the "Focus" button
+// Adiciona um evento ao botão "Foco" para alterar o contexto
 focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 30; // Define o tempo para 30 segundos | Set time to 30 seconds
-    alterarContexto('foco'); // Altera o contexto para "Foco" | Change context to "Focus"
-    focoBt.classList.add('active'); // Adiciona a classe "active" ao botão | Add "active" class to the button
-});
+    tempoDecorridoEmSegundos = 30 // Define o tempo para 30 segundos
+    alterarContexto('foco') // Altera o contexto para "foco"
+    focoBt.classList.add('active') // Adiciona a classe "active" ao botão
+})
 
-// Listener para o botão "Descanso Curto" | Listener for the "Short Break" button
+// Adiciona um evento ao botão "Descanso curto" para alterar o contexto
 curtoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 5; // Define o tempo para 5 segundos | Set time to 5 seconds
-    alterarContexto('descanso-curto'); // Altera o contexto para "Descanso Curto" | Change context to "Short Break"
-    curtoBt.classList.add('active'); // Adiciona a classe "active" ao botão | Add "active" class to the button
-});
+    tempoDecorridoEmSegundos = 5 // Define o tempo para 5 segundos
+    alterarContexto('descanso-curto') // Altera o contexto para "descanso curto"
+    curtoBt.classList.add('active') // Adiciona a classe "active" ao botão
+})
 
-// Listener para o botão "Descanso Longo" | Listener for the "Long Break" button
+// Adiciona um evento ao botão "Descanso longo" para alterar o contexto
 longoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 15; // Define o tempo para 15 segundos | Set time to 15 seconds
-    alterarContexto('descanso-longo'); // Altera o contexto para "Descanso Longo" | Change context to "Long Break"
-    longoBt.classList.add('active'); // Adiciona a classe "active" ao botão | Add "active" class to the button
-});
+    tempoDecorridoEmSegundos = 15 // Define o tempo para 15 segundos
+    alterarContexto('descanso-longo') // Altera o contexto para "descanso longo"
+    longoBt.classList.add('active') // Adiciona a classe "active" ao botão
+})
 
-// Função para alterar o contexto da aplicação | Function to change the application context
+// Função para alterar o contexto da aplicação
 function alterarContexto(contexto) {
-    mostrarTempo(); // Atualiza o tempo exibido na tela | Update the time displayed on the screen
-    botoes.forEach(function (botao) {
-        botao.classList.remove('active'); // Remove a classe "active" de todos os botões | Remove the "active" class from all buttons
-    });
-    html.setAttribute('data-contexto', contexto); // Atualiza o atributo de contexto no HTML | Update the context attribute in HTML
-    banner.setAttribute('src', `/imagens/${contexto}.png`); // Atualiza a imagem do banner | Update the banner image
-
-    // Atualiza o título principal com base no contexto | Update the main title based on the context
+    mostrarTempo() // Atualiza o tempo na tela
+    botoes.forEach(function (contexto){
+        contexto.classList.remove('active') // Remove a classe "active" de todos os botões
+    })
+    html.setAttribute('data-contexto', contexto) // Define o atributo "data-contexto" no <html>
+    banner.setAttribute('src', `/imagens/${contexto}.png`) // Altera a imagem do banner com base no contexto
     switch (contexto) {
         case "foco":
             titulo.innerHTML = `
             Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>
-            `;
+            `
             break;
         case "descanso-curto":
             titulo.innerHTML = `
             Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>
-            `;
+            ` 
             break;
         case "descanso-longo":
             titulo.innerHTML = `
             Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>
-            `;
-            break;
+            `
         default:
             break;
     }
 }
 
-// Função que controla a contagem regressiva do timer | Function to control the timer countdown
+// Função para realizar a contagem regressiva
 const contagemRegressiva = () => {
-    if (tempoDecorridoEmSegundos <= 0) {
-        audioTempoFinalizado.play(); // Toca o som de finalização | Play the end sound
-        alert('Tempo finalizado!'); // Exibe um alerta ao usuário | Show an alert to the user
-        zerar(); // Reseta o timer | Reset the timer
-        return;
+    if(tempoDecorridoEmSegundos <= 0){
+        audioTempoFinalizado.play() // Reproduz o som de "tempo finalizado"
+        alert('Tempo finalizado!') // Exibe um alerta
+        zerar() // Reseta o timer
+        return
     }
-    tempoDecorridoEmSegundos -= 1; // Decrementa o tempo em 1 segundo | Decrease time by 1 second
-    mostrarTempo(); // Atualiza o tempo exibido na tela | Update the time displayed on the screen
-};
+    tempoDecorridoEmSegundos -= 1 // Decrementa o tempo em 1 segundo
+    mostrarTempo() // Atualiza o tempo na tela
+}
 
-// Listener para o botão principal (Iniciar/Pausar) | Listener for the main button (Start/Pause)
-startPauseBt.addEventListener('click', iniciarOuPausar);
+// Adiciona um evento ao botão "Iniciar/Pausar"
+startPauseBt.addEventListener('click', iniciarOuPausar)
 
-// Função para iniciar ou pausar o timer | Function to start or pause the timer
+// Função para iniciar ou pausar o timer
 function iniciarOuPausar() {
-    if (intervaloId) {
-        audioPausa.play(); // Toca o som de pausa | Play the pause sound
-        zerar(); // Reseta o timer | Reset the timer
-        return;
+    if(intervaloId){
+        audioPausa.play() // Reproduz o som de "pause"
+        zerar() // Reseta o timer
+        return
     }
-    audioPlay.play(); // Toca o som de início | Play the start sound
-    intervaloId = setInterval(contagemRegressiva, 1000); // Inicia o intervalo de 1 segundo | Start the 1-second interval
-    iniciarOuPausarBt.textContent = "Pausar"; // Atualiza o texto do botão para "Pausar" | Update the button text to "Pause"
-    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/pause.png`); // Atualiza o ícone para "pause" | Update the icon to "pause"
+    audioPlay.play() // Reproduz o som de "play"
+    intervaloId = setInterval(contagemRegressiva, 1000) // Inicia a contagem regressiva
+    iniciarOuPausarBt.textContent = "Pausar" // Altera o texto do botão para "Pausar"
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/pause.png`) // Altera o ícone do botão para "pause"
 }
 
-// Função para zerar o timer e redefinir o botão | Function to reset the timer and reset the button
+// Função para resetar o timer
 function zerar() {
-    clearInterval(intervaloId); // Limpa o intervalo do timer | Clear the timer interval
-    iniciarOuPausarBt.textContent = "Começar"; // Redefine o texto do botão para "Começar" | Reset the button text to "Start"
-    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`); // Atualiza o ícone para "play" | Update the icon to "play"
-    intervaloId = null; // Reseta o ID do intervalo | Reset the interval ID
+    clearInterval(intervaloId) // Limpa o intervalo
+    iniciarOuPausarBt.textContent = "Começar" // Altera o texto do botão para "Começar"
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`) // Altera o ícone do botão para "play"
+    intervaloId = null // Reseta o ID do intervalo
 }
 
-// Função para formatar e exibir o tempo restante | Function to format and display the remaining time
+// Função para exibir o tempo formatado na tela
 function mostrarTempo() {
-    const tempo = new Date(tempoDecorridoEmSegundos * 1000); // Converte o tempo restante para um objeto Date | Convert the remaining time to a Date object
-    const tempoFormatado = tempo.toLocaleTimeString('pt-BR', {
-        minute: '2-digit',
-        second: '2-digit',
-    }); // Formata o tempo para "MM:SS" | Format the time to "MM:SS"
-    tempoNaTela.innerHTML = `${tempoFormatado}`; // Atualiza o elemento na tela | Update the element on the screen
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000) // Converte o tempo para o formato Date
+    const tempoFormatado = tempo.toLocaleTimeString('pt-Br', {minute: '2-digit', second: '2-digit'}) // Formata o tempo
+    tempoNaTela.innerHTML = `${tempoFormatado}` // Exibe o tempo na tela
 }
 
-// Exibe o tempo inicial ao carregar a página | Display the initial time when the page loads
-mostrarTempo();
-
-// Função para adicionar uma nova tarefa à lista
-function adicionarTarefa(descricao) {
-    // Seleciona a lista de tarefas
-    const listaTarefas = document.querySelector('.app__section-task-list');
-
-    // Cria um novo item da lista
-    const item = document.createElement('li');
-    item.classList.add('app__section-task-list-item'); // Adiciona a classe ao item da lista
-
-    // Cria o parágrafo para a descrição da tarefa
-    const paragrafo = document.createElement('p');
-    paragrafo.classList.add('app__section-task-list-item-description'); // Adiciona a classe ao parágrafo
-    paragrafo.textContent = descricao; // Define o texto do parágrafo
-
-    // Cria o botão de edição
-    const botaoEditar = document.createElement('button');
-    botaoEditar.classList.add('app_button-edit'); // Adiciona a classe ao botão
-    botaoEditar.textContent = 'Editar'; // Define o texto do botão
-
-    // Adiciona o parágrafo e o botão ao item da lista
-    item.appendChild(paragrafo);
-    item.appendChild(botaoEditar);
-
-    // Adiciona o item à lista de tarefas
-    listaTarefas.appendChild(item);
-}
-
-// Exemplo de uso: adicionando uma nova tarefa
-adicionarTarefa('Minha nova tarefa');
+// Exibe o tempo inicial na tela ao carregar a aplicação
+mostrarTempo()
