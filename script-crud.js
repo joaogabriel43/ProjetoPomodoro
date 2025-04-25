@@ -10,8 +10,43 @@ const textarea = document.querySelector('.app__form-textarea');
 // Seleciona a lista de tarefas (ul) com a classe .app__section-task-list
 const ulTarefas = document.querySelector('.app__section-task-list');
 
+// Seleciona o elemento que exibe a descrição da tarefa ativa com a classe .app__section-active-task-description
+const paragrafoDescricaoTarefa = document.querySelector('.app__section-active-task-description');
+
 // Recupera as tarefas salvas no localStorage ou inicializa um array vazio
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+
+// Recupera as tarefas concluídas salvas no localStorage ou inicializa um array vazio
+const tarefasConcluidas = JSON.parse(localStorage.getItem('tarefasConcluidas')) || [];
+
+// seleciona o botão "Cancelar" com a classe .app__button--cancel
+const btnCancelar = document.querySelector('.app__form-footer__button--cancel');
+
+
+
+
+// Função para atualizar as tarefas no localStorage
+function atualizarTarefas() {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas)); // Salva as tarefas no localStorage
+}
+
+// Função para atualizar as tarefas concluidas no localStorage
+function atualizarTarefasConcluidas() {
+    // Encontra a tarefa concluída no array de tarefas
+    const tarefaConcluida = tarefas.find(tarefa => tarefa.descricao === paragrafoDescricaoTarefa.textContent);
+    if (tarefaConcluida) {
+        // Remove a tarefa do array de tarefas
+        tarefas.splice(tarefas.indexOf(tarefaConcluida), 1);
+
+        // Adiciona a tarefa ao array de tarefas concluídas
+        tarefasConcluidas.push(tarefaConcluida);
+    }
+
+    // Atualiza o localStorage com os arrays atualizados
+    localStorage.setItem('tarefas', JSON.stringify(tarefas)); // Atualiza o array de tarefas
+    localStorage.setItem('tarefasConcluidas', JSON.stringify(tarefasConcluidas)); // Atualiza o array de tarefas concluídas
+}
+
 
 // Função para criar um elemento de tarefa na lista
 function criarElementoTarefa(tarefa) {
@@ -45,7 +80,7 @@ function criarElementoTarefa(tarefa) {
         if (novaDescricao) {
             paragrafo.textContent = novaDescricao; // Atualiza o texto do parágrafo com a nova descrição
             tarefa.descricao = novaDescricao; // Atualiza a descrição no array de tarefas
-            localStorage.setItem('tarefas', JSON.stringify(tarefas)); // Salva as alterações no localStorage
+            atualizarTarefas(); // Salva as tarefas atualizadas no localStorage
         }
     };
 
@@ -58,6 +93,13 @@ function criarElementoTarefa(tarefa) {
     li.append(svg);
     li.append(paragrafo);
     li.append(botao);
+
+    li.onclick = () => {
+        paragrafoDescricaoTarefa.textContent = tarefa.descricao; // Atualiza a descrição exibida
+        if (li.classList.contains('active')) {
+            paragrafoDescricaoTarefa.textContent = ''; // Atualiza a descrição exibida
+        }
+    };
 
     // Retorna o elemento <li> criado
     return li;
@@ -86,7 +128,7 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {
     ulTarefas.append(elementoTarefa);
 
     // Salva as tarefas atualizadas no localStorage
-    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    atualizarTarefas();
 
     // Limpa o campo de texto do formulário
     textarea.value = '';
@@ -97,7 +139,95 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {
 
 // Renderiza as tarefas salvas no localStorage ao carregar a página
 tarefas.forEach(tarefa => {
-    // Cria o elemento da tarefa e adiciona à lista de tarefas no DOM
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefas.append(elementoTarefa);
+});
+
+// Renderiza as tarefas concluídas salvas no localStorage ao carregar a página
+tarefasConcluidas.forEach(tarefa => {
+    const elementoTarefa = criarElementoTarefa(tarefa);
+    elementoTarefa.classList.add('completed'); // Marca a tarefa como concluída
+
+    // Aplica o estilo de texto riscado
+    const descricao = elementoTarefa.querySelector('.app__section-task-list-item-description');
+    if (descricao) {
+        descricao.style.textDecoration = 'line-through'; // Adiciona um risco no texto
+    }
+
+    // Desativa o botão de edição
+    const botaoEditar = elementoTarefa.querySelector('.app_button-edit');
+    if (botaoEditar) {
+        botaoEditar.disabled = true; // Desativa o botão
+    }
+
+    ulTarefas.append(elementoTarefa); // Adiciona a tarefa concluída à lista
+});
+
+// Adiciona um evento de clique ao botão "Cancelar"
+btnCancelar.addEventListener('click', () => {
+    // Limpa o campo de texto do formulário
+    textarea.value = '';
+
+    // Esconde o formulário de adicionar tarefas
+    formAdicionarTarefa.classList.add('hidden');
+}
+);
+//================================================================================================================
+// Adiciona um evento de clique ao elemento da lista de tarefas (delegação de eventos)
+ulTarefas.addEventListener('click', (evento) => {
+    // Verifica se o clique foi em um item da lista de tarefas
+    const tarefaClicada = evento.target.closest('.app__section-task-list-item');
+    if (!tarefaClicada) return; // Sai se o clique não foi em uma tarefa
+
+    // Impede que tarefas concluídas sejam clicadas
+    if (tarefaClicada.classList.contains('completed')) {
+        console.log('Tarefa concluída não pode ser selecionada.');
+        return; // Sai imediatamente
+    }
+
+    // Verifica se a tarefa clicada já está ativa
+    const isAlreadyActive = tarefaClicada.classList.contains('active');
+
+    // Remove a classe "active" de todas as tarefas
+    document.querySelectorAll('.app__section-task-list-item.active').forEach((tarefa) => {
+        tarefa.classList.remove('active');
+    });
+
+    // Se a tarefa clicada não estava ativa, ativa ela
+    if (!isAlreadyActive) {
+        tarefaClicada.classList.add('active');
+    }
+
+    // Atualiza a descrição exibida
+    const descricaoTarefa = tarefaClicada.querySelector('.app__section-task-list-item-description').textContent;
+    const descricaoExibida = document.querySelector('.app__section-task-description');
+    descricaoExibida.textContent = tarefaClicada.classList.contains('active') ? descricaoTarefa : ''; // Mostra ou limpa a descrição
+});
+//================================================================================================================
+// Escuta o evento customizado FocoFinalizado
+document.addEventListener('FocoFinalizado', () => {
+    // Verifica se há uma tarefa selecionada
+    const tarefaSelecionada = document.querySelector('.app__section-task-list-item.active');
+    if (!tarefaSelecionada) {
+        console.log('Nenhuma tarefa selecionada para marcar como concluída.');
+        return;
+    }
+
+    // Marca a tarefa como concluída
+    tarefaSelecionada.classList.add('completed'); // Adiciona a classe para indicar conclusão
+    tarefaSelecionada.classList.remove('active'); // Remove a classe "active"
+    atualizarTarefasConcluidas(); // Atualiza o localStorage com as tarefas concluídas
+    // Atualiza a interface do usuário
+    const descricao = tarefaSelecionada.querySelector('.app__section-task-list-item-description');
+    if (descricao) {
+        descricao.style.textDecoration = 'line-through'; // Adiciona um risco no texto
+    }
+
+    // Desabilita o botão de edição
+    const botaoEditar = tarefaSelecionada.querySelector('.app_button-edit');
+    if (botaoEditar) {
+        botaoEditar.disabled = true; // Desativa o botão
+    }
+
+    console.log('Tarefa marcada como concluída:', descricao.textContent);
 });

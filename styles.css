@@ -534,3 +534,20 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.8; /* Define a opacidade */
     cursor: not-allowed; /* Define o cursor como não permitido */
 }
+
+/* Destaque para a tarefa ativa */
+.app__section-task-list-item.active {
+    border: 2px solid #B872FF; /* Borda roxa */
+}
+
+/* Estilo para o círculo dentro de tarefas concluídas */
+.app__section-task-list-item.completed .app__section-task-icon-status circle {
+    fill: #00f4bf54; /* Cor verde */
+}
+
+/* Estilo para o item de lista concluído */
+.app__section-task-list-item.completed {
+    background-color: #007a5f9f; /* Fundo verde */
+    pointer-events: none; /* Desativa cliques e interações */
+    opacity: 0.8; /* Reduz a opacidade para indicar que está desativada */
+}
