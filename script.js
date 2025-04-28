@@ -44,10 +44,10 @@ const audioPlay = new Audio('/sons/play.wav')
 const audioPausa = new Audio('/sons/pause.mp3')
 
 // Cria um objeto de áudio para o som de "tempo finalizado"
-const audioTempoFinalizado = new Audio('./sons/beep.mp3')
+const audioTempoFinalizado = new Audio('./sons/bellding-254774.mp3')
 
 // Define o tempo inicial em segundos
-let tempoDecorridoEmSegundos = 30
+let tempoDecorridoEmSegundos = 25 * 60
 
 // Armazena o ID do intervalo para controle da contagem regressiva
 let intervaloId = null
@@ -66,49 +66,54 @@ musicaFocoInput.addEventListener('change', () => {
 
 // Adiciona um evento ao botão "Foco" para alterar o contexto
 focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 30 // Define o tempo para 30 segundos
+    tempoDecorridoEmSegundos = 25 * 60 // Define o tempo para 30 segundos
     alterarContexto('foco') // Altera o contexto para "foco"
     focoBt.classList.add('active') // Adiciona a classe "active" ao botão
 })
 
 // Adiciona um evento ao botão "Descanso curto" para alterar o contexto
 curtoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 5 // Define o tempo para 5 segundos
+    tempoDecorridoEmSegundos = 5 * 60 // Define o tempo para 5 segundos
     alterarContexto('descanso-curto') // Altera o contexto para "descanso curto"
     curtoBt.classList.add('active') // Adiciona a classe "active" ao botão
 })
 
 // Adiciona um evento ao botão "Descanso longo" para alterar o contexto
 longoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 15 // Define o tempo para 15 segundos
+    tempoDecorridoEmSegundos = 15 * 60 // Define o tempo para 15 segundos
     alterarContexto('descanso-longo') // Altera o contexto para "descanso longo"
     longoBt.classList.add('active') // Adiciona a classe "active" ao botão
 })
 
 // Função para alterar o contexto da aplicação
 function alterarContexto(contexto) {
-    mostrarTempo() // Atualiza o tempo na tela
-    botoes.forEach(function (contexto){
-        contexto.classList.remove('active') // Remove a classe "active" de todos os botões
-    })
-    html.setAttribute('data-contexto', contexto) // Define o atributo "data-contexto" no <html>
-    banner.setAttribute('src', `/imagens/${contexto}.png`) // Altera a imagem do banner com base no contexto
+    zerar(); // Reseta o timer ao mudar o contexto
+    mostrarTempo(); // Atualiza o tempo na tela
+    botoes.forEach(function (contexto) {
+        contexto.classList.remove('active'); // Remove a classe "active" de todos os botões
+    });
+    html.setAttribute('data-contexto', contexto); // Define o atributo "data-contexto" no <html>
+    banner.setAttribute('src', `/imagens/${contexto}.png`); // Altera a imagem do banner com base no contexto
     switch (contexto) {
         case "foco":
             titulo.innerHTML = `
             Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>
-            `
+            `;
+            tempoDecorridoEmSegundos = 25 * 60; // Define o tempo para 30 segundos
             break;
         case "descanso-curto":
             titulo.innerHTML = `
             Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>
-            ` 
+            `;
+            tempoDecorridoEmSegundos = 5 * 60; // Define o tempo para 5 segundos
             break;
         case "descanso-longo":
             titulo.innerHTML = `
             Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>
-            `
+            `;
+            tempoDecorridoEmSegundos = 15 * 60; // Define o tempo para 15 segundos
+            break;
         default:
             break;
     }

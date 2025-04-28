@@ -13,6 +13,12 @@ const ulTarefas = document.querySelector('.app__section-task-list');
 // Seleciona o elemento que exibe a descrição da tarefa ativa com a classe .app__section-active-task-description
 const paragrafoDescricaoTarefa = document.querySelector('.app__section-active-task-description');
 
+// Seleciona o botão "Limpar tarefas concluídas"
+const btnRemoverConcluidas = document.querySelector('#btn-remover-concluidas');
+
+//seleciona o botão "limpar todas tarefas"
+const btnLimparTodasTarefas = document.querySelector('#btn-remover-todas');
+
 // Recupera as tarefas salvas no localStorage ou inicializa um array vazio
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
@@ -37,7 +43,6 @@ function atualizarTarefasConcluidas() {
     if (tarefaConcluida) {
         // Remove a tarefa do array de tarefas
         tarefas.splice(tarefas.indexOf(tarefaConcluida), 1);
-
         // Adiciona a tarefa ao array de tarefas concluídas
         tarefasConcluidas.push(tarefaConcluida);
     }
@@ -230,4 +235,32 @@ document.addEventListener('FocoFinalizado', () => {
     }
 
     console.log('Tarefa marcada como concluída:', descricao.textContent);
+});
+
+// Função para limpar tarefas
+function limparTarefas(opcao) {
+    if (opcao === 'concluidas') {
+        tarefasConcluidas.length = 0; // Limpa o array de tarefas concluídas
+        localStorage.setItem('tarefasConcluidas', JSON.stringify(tarefasConcluidas)); // Atualiza o localStorage
+        document.querySelectorAll('.app__section-task-list-item.completed').forEach((tarefa) => {
+            tarefa.remove(); // Remove os elementos concluídos do DOM
+        });
+    } else if (opcao === 'todas') {
+        tarefas.length = 0; // Limpa o array de tarefas pendentes
+        tarefasConcluidas.length = 0; // Limpa o array de tarefas concluídas
+        localStorage.setItem('tarefas', JSON.stringify(tarefas)); // Atualiza o localStorage
+        localStorage.setItem('tarefasConcluidas', JSON.stringify(tarefasConcluidas)); // Atualiza o localStorage
+        ulTarefas.innerHTML = ''; // Remove todas as tarefas do DOM
+        paragrafoDescricaoTarefa.textContent = ''; // Limpa a descrição exibida
+    }
+}
+
+// Adiciona o evento de clique ao botão "Limpar tarefas concluídas"
+btnRemoverConcluidas.addEventListener('click', () => {
+    limparTarefas('concluidas'); // Chama a função para limpar tarefas concluídas
+});
+
+// Adiciona o evento de clique ao botão "Limpar todas as tarefas"
+btnLimparTodasTarefas.addEventListener('click', () => {
+    limparTarefas('todas'); // Chama a função para limpar todas as tarefas
 });
