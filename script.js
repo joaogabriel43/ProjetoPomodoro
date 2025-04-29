@@ -46,8 +46,13 @@ const audioPausa = new Audio('/sons/pause.mp3')
 // Cria um objeto de áudio para o som de "tempo finalizado"
 const audioTempoFinalizado = new Audio('./sons/bellding-254774.mp3')
 
-// Define o tempo inicial em segundos
-let tempoDecorridoEmSegundos = 25 * 60
+// Valores iniciais para cada contexto
+const TEMPO_INICIAL_FOCO = 25 //25 * 60; // 25 minutos
+const TEMPO_INICIAL_DESCANSO_CURTO = 5 * 60; // 5 minutos
+const TEMPO_INICIAL_DESCANSO_LONGO = 15 * 60; // 15 minutos
+
+// Define o tempo inicial em segundos (começa com o valor de foco)
+let tempoDecorridoEmSegundos = TEMPO_INICIAL_FOCO;
 
 // Armazena o ID do intervalo para controle da contagem regressiva
 let intervaloId = null
@@ -66,7 +71,7 @@ musicaFocoInput.addEventListener('change', () => {
 
 // Adiciona um evento ao botão "Foco" para alterar o contexto
 focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 25 * 60 // Define o tempo para 30 segundos
+    tempoDecorridoEmSegundos = 25//25 * 60 // Define o tempo para 30 segundos
     alterarContexto('foco') // Altera o contexto para "foco"
     focoBt.classList.add('active') // Adiciona a classe "active" ao botão
 })
@@ -88,9 +93,8 @@ longoBt.addEventListener('click', () => {
 // Função para alterar o contexto da aplicação
 function alterarContexto(contexto) {
     zerar(); // Reseta o timer ao mudar o contexto
-    mostrarTempo(); // Atualiza o tempo na tela
-    botoes.forEach(function (contexto) {
-        contexto.classList.remove('active'); // Remove a classe "active" de todos os botões
+    botoes.forEach(function (botao) {
+        botao.classList.remove('active'); // Remove a classe "active" de todos os botões
     });
     html.setAttribute('data-contexto', contexto); // Define o atributo "data-contexto" no <html>
     banner.setAttribute('src', `/imagens/${contexto}.png`); // Altera a imagem do banner com base no contexto
@@ -100,23 +104,24 @@ function alterarContexto(contexto) {
             Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>
             `;
-            tempoDecorridoEmSegundos = 25 * 60; // Define o tempo para 30 segundos
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_FOCO; // Reseta para o tempo inicial de foco
             break;
         case "descanso-curto":
             titulo.innerHTML = `
             Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>
             `;
-            tempoDecorridoEmSegundos = 5 * 60; // Define o tempo para 5 segundos
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_DESCANSO_CURTO; // Reseta para o tempo inicial de descanso curto
             break;
         case "descanso-longo":
             titulo.innerHTML = `
             Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>
             `;
-            tempoDecorridoEmSegundos = 15 * 60; // Define o tempo para 15 segundos
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_DESCANSO_LONGO; // Reseta para o tempo inicial de descanso longo
             break;
         default:
             break;
     }
+    mostrarTempo(); // Atualiza o tempo na tela
 }
 
 // Função para realizar a contagem regressiva
@@ -154,10 +159,25 @@ function iniciarOuPausar() {
 
 // Função para resetar o timer
 function zerar() {
-    clearInterval(intervaloId) // Limpa o intervalo
-    iniciarOuPausarBt.textContent = "Começar" // Altera o texto do botão para "Começar"
-    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`) // Altera o ícone do botão para "play"
-    intervaloId = null // Reseta o ID do intervalo
+    clearInterval(intervaloId); // Limpa o intervalo
+    const contextoAtual = html.getAttribute('data-contexto'); // Obtém o contexto atual
+    switch (contextoAtual) {
+        case "foco":
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_FOCO; // Reseta para o tempo inicial de foco
+            break;
+        case "descanso-curto":
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_DESCANSO_CURTO; // Reseta para o tempo inicial de descanso curto
+            break;
+        case "descanso-longo":
+            tempoDecorridoEmSegundos = TEMPO_INICIAL_DESCANSO_LONGO; // Reseta para o tempo inicial de descanso longo
+            break;
+        default:
+            break;
+    }
+    iniciarOuPausarBt.textContent = "Começar"; // Altera o texto do botão para "Começar"
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`); // Altera o ícone do botão para "play"
+    intervaloId = null; // Reseta o ID do intervalo
+    mostrarTempo(); // Atualiza o tempo na tela
 }
 
 // Função para exibir o tempo formatado na tela

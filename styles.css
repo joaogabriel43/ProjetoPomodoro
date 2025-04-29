@@ -551,3 +551,35 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: none; /* Desativa cliques e interações */
     opacity: 0.8; /* Reduz a opacidade para indicar que está desativada */
 }
+
+/* Contêiner das sessões */
+.app__card-sessoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px; /* Espaçamento entre as bolinhas e o timer */
+}
+
+/* Contêiner para as bolinhas da esquerda e direita */
+.app__card-sessoes-esquerda,
+.app__card-sessoes-direita {
+    display: flex;
+    gap: 8px; /* Espaçamento entre as bolinhas */
+}
+
+/* Estilo das bolinhas */
+.app__card-sessao {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff; /* Cor padrão (não concluído) */
+    border: 1px solid #ccc;
+    opacity: 0.5; /* Bolinhas não concluídas ficam mais opacas */
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+/* Bolinhas concluídas */
+.app__card-sessao.concluida {
+    background-color: #00F4BF; /* Cor verde para concluído */
+    opacity: 1; /* Bolinhas concluídas ficam mais visíveis */
+}

@@ -264,3 +264,22 @@ btnRemoverConcluidas.addEventListener('click', () => {
 btnLimparTodasTarefas.addEventListener('click', () => {
     limparTarefas('todas'); // Chama a função para limpar todas as tarefas
 });
+
+// Seleciona todas as bolinhas
+const sessoes = document.querySelectorAll('.app__card-sessao');
+
+// Variável para rastrear o número de sessões concluídas
+let sessoesConcluidas = 0;
+
+// Função para marcar uma sessão como concluída
+function marcarSessaoConcluida() {
+    if (sessoesConcluidas < sessoes.length) {
+        sessoes[sessoesConcluidas].classList.add('concluida'); // Marca a bolinha como concluída
+        sessoesConcluidas++; // Incrementa o contador de sessões concluídas
+    }
+}
+
+// Escuta o evento "FocoFinalizado" para marcar a bolinha
+document.addEventListener('FocoFinalizado', () => {
+    marcarSessaoConcluida(); // Marca a próxima bolinha como concluída
+});
